@@ -231,6 +231,12 @@ h2 {
 .form--loan {
   grid-template-columns: 2.5fr 1fr 2.5fr;
 }
+.space {
+  opacity: 0;
+}
+.space:focus {
+  cursor: none;
+}
 
 .form__input {
   width: 100%;
@@ -267,7 +273,7 @@ h2 {
 /* LOGOUT TIMER */
 .logout-timer {
   padding: 0 0.3rem;
-  margin-top: 1.9rem;
+  margin-top: 1.2rem;
   text-align: right;
   font-size: 1.25rem;
 }
