@@ -123,3 +123,19 @@ createUsernames(accounts);
 
 /////////////////////////////////////////////////////////////////////
 // Event handlers
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display UI and message
+    // Display movements
+    // Display balance
+    // Display summary
+  }
+});
