@@ -14,9 +14,9 @@ const account1 = {
     '2021-04-01T10:17:24.185Z',
     '2021-05-27T17:01:17.194Z',
     '2021-07-11T23:36:17.929Z',
-    '2021-11-18T21:31:17.178Z',
-    '2021-12-23T07:42:02.383Z',
-    '2022-01-08T14:11:59.604Z',
+    '2021-12-18T21:31:17.178Z',
+    '2022-01-05T07:42:02.383Z',
+    '2022-01-09T14:11:59.604Z',
     '2022-01-10T10:51:36.790Z',
   ],
 };
@@ -104,6 +104,23 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////////////////////////
 // Functions
+const formatMovementDate = function (date) {
+  const calcDaysPassed = (date1, date2) =>
+    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+  const daysPassed = calcDaysPassed(new Date(), date);
+
+  if (daysPassed === 1) return 'Today';
+  if (daysPassed === 2) return 'Yesterday';
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
+  else {
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+};
+
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = null;
 
@@ -115,10 +132,7 @@ const displayMovements = function (acc, sort = false) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const date = new Date(acc.movementDates[i]);
-    const day = `${date.getDate()}`.padStart(2, 0);
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
-    const displayDate = `${day}/${month}/${year}`;
+    const displayDate = formatMovementDate(date);
 
     const html = `
     <div class="movements__row">
