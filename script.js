@@ -118,8 +118,8 @@ const formatMovementDate = function (date, locale) {
 
   const daysPassed = calcDaysPassed(new Date(), date);
 
-  if (daysPassed === 1) return 'Today';
-  if (daysPassed === 2) return 'Yesterday';
+  if (daysPassed === 0) return 'Today';
+  if (daysPassed === 1) return 'Yesterday';
   if (daysPassed <= 7) return `${daysPassed} days ago`;
 
   return Intl.DateTimeFormat(locale).format(date);
@@ -238,7 +238,7 @@ const startLogOutTimer = function () {
   };
 
   // Set time to 10 minutes
-  let time = 30;
+  let time = 600;
 
   // Call the timer every second
   tick();
@@ -329,6 +329,10 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+
+    // Reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -348,6 +352,10 @@ btnLoan.addEventListener('click', function (e) {
       // Update UI
       updateUI(currentAccount);
     }, 5000);
+
+    // Reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
   // Clear input fields
   inputLoanAmount.value = null;
